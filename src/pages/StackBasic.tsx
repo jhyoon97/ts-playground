@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import { useState } from "react";
 
 // structures
@@ -5,7 +6,7 @@ import Stack from "structures/Stack";
 
 const stack = new Stack();
 
-const Main = () => {
+const StackBasic = () => {
   const [data, setData] = useState(stack.getItems());
   const [input, setInput] = useState("");
 
@@ -31,8 +32,8 @@ const Main = () => {
 
   return (
     <div>
-      {data.map((item) => (
-        <div>{item}</div>
+      {data.map((item, index) => (
+        <div key={index}>{item}</div>
       ))}
       <form
         onSubmit={(e) => {
@@ -56,4 +57,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default StackBasic;
