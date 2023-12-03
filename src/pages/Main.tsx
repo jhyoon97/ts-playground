@@ -4,6 +4,7 @@ import { css } from "@emotion/react";
 const box = css`
   display: flex;
   flex-direction: row;
+  height: 100vh;
 `;
 
 const side = css`

@@ -1,5 +1,9 @@
 /* eslint-disable react/no-array-index-key */
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
+// components
+import Input from "components/Input";
+import Button from "components/Button";
 
 // structures
 import Stack from "structures/Stack";
@@ -9,6 +13,12 @@ const stack = new Stack();
 const StackBasic = () => {
   const [data, setData] = useState(stack.getItems());
   const [input, setInput] = useState("");
+
+  useEffect(() => {
+    return () => {
+      stack.clear();
+    };
+  }, []);
 
   const handlePush = () => {
     stack.push(input);
@@ -22,7 +32,11 @@ const StackBasic = () => {
   };
 
   const handlePeak = () => {
-    console.log(stack.peek());
+    console.log(stack.peak());
+  };
+
+  const handleGetSize = () => {
+    console.log(stack.getSize());
   };
 
   const handleClear = () => {
@@ -41,17 +55,20 @@ const StackBasic = () => {
           handlePush();
         }}
       >
-        <input onChange={(e) => setInput(e.target.value)} value={input} />
-        <button type="submit">PUSH</button>
-        <button type="button" onClick={handlePop}>
+        <Input onChange={(e) => setInput(e.target.value)} value={input} />
+        <Button type="submit">PUSH</Button>
+        <Button type="button" onClick={handlePop}>
           POP
-        </button>
-        <button type="button" onClick={handlePeak}>
+        </Button>
+        <Button type="button" onClick={handlePeak}>
           PEAK
-        </button>
-        <button type="button" onClick={handleClear}>
+        </Button>
+        <Button type="button" onClick={handleGetSize}>
+          SIZE
+        </Button>
+        <Button type="button" onClick={handleClear}>
           CLEAR
-        </button>
+        </Button>
       </form>
     </div>
   );

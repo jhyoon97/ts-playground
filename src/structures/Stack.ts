@@ -9,7 +9,7 @@ export default class Stack {
     return this.items.pop();
   }
 
-  peek() {
+  peak() {
     return this.items[this.items.length - 1];
   }
 
@@ -21,7 +21,7 @@ export default class Stack {
     this.items = [];
   }
 
-  size() {
+  getSize() {
     return this.items.length;
   }
 
