@@ -9,16 +9,16 @@ export default class Stack {
     return this.items.pop();
   }
 
-  peak() {
+  clear() {
+    this.items = [];
+  }
+
+  getPeak() {
     return this.items[this.items.length - 1];
   }
 
-  isEmpty() {
+  getIsEmpty() {
     return this.items.length === 0;
-  }
-
-  clear() {
-    this.items = [];
   }
 
   getSize() {

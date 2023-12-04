@@ -32,7 +32,7 @@ const StackBasic = () => {
   };
 
   const handlePeak = () => {
-    console.log(stack.peak());
+    console.log(stack.getPeak());
   };
 
   const handleGetSize = () => {
