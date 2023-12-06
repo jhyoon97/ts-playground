@@ -34,7 +34,15 @@ export default class PriorityQueue<T> {
     return this.items.length === 0;
   }
 
+  getItems() {
+    return [...this.items];
+  }
+
   getSize() {
     return this.items.length;
+  }
+
+  clear() {
+    this.items = [];
   }
 }

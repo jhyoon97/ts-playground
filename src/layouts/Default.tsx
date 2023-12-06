@@ -26,6 +26,7 @@ const Main = () => {
         <NavLink to="/stack-basic">Stack - basic</NavLink>
         <NavLink to="/stack-number-base">Stack - 진수변환</NavLink>
         <NavLink to="/queue-basic">Queue - basic</NavLink>
+        <NavLink to="/priority-queue">우선순위 Queue</NavLink>
       </div>
 
       <div css={outletBox}>
