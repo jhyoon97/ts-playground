@@ -4,15 +4,19 @@ import { css } from "@emotion/react";
 const box = css`
   display: flex;
   flex-direction: row;
+  width: 100%;
   height: 100vh;
 `;
 
 const side = css`
   display: flex;
   flex-direction: column;
-  padding-right: 20px;
-  margin-right: 20px;
+  padding: 1rem;
   border-right: 1px solid #000;
+`;
+
+const outletBox = css`
+  flex: 1;
 `;
 
 const Main = () => {
@@ -23,7 +27,9 @@ const Main = () => {
         <NavLink to="/stack-number-base">Stack - 진수변환</NavLink>
       </div>
 
-      <Outlet />
+      <div css={outletBox}>
+        <Outlet />
+      </div>
     </div>
   );
 };

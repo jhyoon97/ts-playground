@@ -1,5 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 import { useState } from "react";
+import { css } from "@emotion/react";
 
 // components
 import Input from "components/Input";
@@ -11,76 +12,120 @@ import Stack from "structures/Stack";
 const stack = new Stack();
 const charset = "0123456789ABCDEF";
 
+const box = css`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+`;
+
+const dataBox = css`
+  flex: 1;
+  display: flex;
+  flex-direction: column-reverse;
+  padding: 1rem;
+`;
+
+const dataItem = css`
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  background: #333;
+  border-radius: 1rem;
+  color: #fff;
+  width: 100%;
+  text-align: center;
+
+  & > mark {
+    background: none;
+    color: yellow;
+  }
+`;
+
+const resultBox = css`
+  padding: 1rem;
+`;
+
+const formBox = css`
+  display: flex;
+  flex-direction: row;
+  padding: 1rem;
+  width: 100%;
+
+  & > *:not(:last-child) {
+    margin-right: 0.5rem;
+  }
+`;
+
 const StackNumberBase = () => {
-  const [results, setResults] = useState<Array<string>>([]);
+  const [result, setResult] = useState<string>("");
+  const [process, setProcess] = useState<Array<any>>([]);
   const [numberInput, setNumberInput] = useState("");
-  const [baseInput, setBaseInput] = useState("");
+  const [numberInputSave, setNumberInputSave] = useState("");
+  const [baseNumber, setBaseNumber] = useState(0);
 
-  const calc = (number: number, base: number) => {
-    const division = Math.floor(number / base);
+  const conversion = (number: number, base: number) => {
+    const quotient = Math.floor(number / base);
 
-    if (division === 0) {
-      stack.push(number);
+    if (quotient === 0) {
+      stack.push({ number, quotient, remainder: number });
       return;
     }
 
-    stack.push(number % base);
-    calc(division, base);
+    stack.push({ number, quotient, remainder: number % base });
+    conversion(quotient, base);
   };
 
-  const handleConvert = () => {
-    if (
-      numberInput === "" ||
-      baseInput === "" ||
-      Number.isNaN(Number(numberInput)) ||
-      Number.isNaN(Number(baseInput))
-    ) {
-      return;
+  const handleConversion = (base: number) => {
+    conversion(Number(numberInput), Number(base));
+
+    setProcess(stack.getItems());
+    let resultString = "";
+
+    while (!stack.getIsEmpty()) {
+      resultString += charset[stack.pop().remainder];
     }
 
-    if (Number(baseInput) > 16) {
-      alert("base number는 16 이하만 가능합니다.");
-      setBaseInput("");
-      return;
-    }
-
-    calc(Number(numberInput), Number(baseInput));
-
-    let result = "";
-
-    while (!stack.isEmpty()) {
-      result += charset[stack.pop()];
-    }
-
-    setResults([
-      ...results,
-      `${numberInput}을(를) ${baseInput}진법으로 변환 : ${result}`,
-    ]);
+    setNumberInputSave(numberInput);
+    setResult(resultString);
+    setBaseNumber(base);
     stack.clear();
-    setNumberInput("");
-    setBaseInput("");
   };
 
   return (
-    <div>
-      {results.map((item, index) => (
-        <div key={index}>{item}</div>
-      ))}
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          handleConvert();
-        }}
-      >
+    <div css={box}>
+      <div css={dataBox}>
+        {process.map((item, index) => (
+          <div key={index} css={dataItem}>
+            STACK[{index}] {" - "}
+            {`${item.number}/${baseNumber} = ${item.quotient}`} ...
+            <mark> {item.remainder}</mark>
+          </div>
+        ))}
+      </div>
+      <div css={resultBox}>
+        {result && (
+          <div css={dataItem}>
+            {numberInputSave}의 {baseNumber}진수: {result}
+          </div>
+        )}
+      </div>
+      <form css={formBox}>
         <Input
           onChange={(e) => setNumberInput(e.target.value)}
           value={numberInput}
         />
-        <Input
-          onChange={(e) => setBaseInput(e.target.value)}
-          value={baseInput}
-        />
-        {numberInput && baseInput && <Button type="submit">CONVERT</Button>}
+        <Button type="button" onClick={() => handleConversion(2)}>
+          2진수
+        </Button>
+        <Button type="button" onClick={() => handleConversion(8)}>
+          8진수
+        </Button>
+        <Button type="button" onClick={() => handleConversion(10)}>
+          10진수
+        </Button>
+        <Button type="button" onClick={() => handleConversion(16)}>
+          16진수
+        </Button>
       </form>
     </div>
   );

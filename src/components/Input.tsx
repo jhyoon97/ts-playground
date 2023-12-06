@@ -5,8 +5,8 @@ import { css } from "@emotion/react";
 import type { InputHTMLAttributes, ClassAttributes } from "react";
 
 const box = css`
+  flex: 1;
   padding: 0.5rem;
-  margin-right: 0.5rem;
   height: 2rem;
   background: #fff;
   border: 1px solid black;

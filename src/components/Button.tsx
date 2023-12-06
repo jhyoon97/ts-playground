@@ -6,7 +6,6 @@ import type { ButtonHTMLAttributes, ClassAttributes } from "react";
 
 const box = css`
   padding: 0 0.5rem;
-  margin-right: 0.5rem;
   background: #f0f0f0;
   height: 2rem;
   border: 1px solid black;

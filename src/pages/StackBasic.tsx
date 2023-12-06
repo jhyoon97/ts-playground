@@ -1,5 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 import { useState, useEffect } from "react";
+import { css } from "@emotion/react";
 
 // components
 import Input from "components/Input";
@@ -9,6 +10,41 @@ import Button from "components/Button";
 import Stack from "structures/Stack";
 
 const stack = new Stack();
+
+const box = css`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+`;
+
+const dataBox = css`
+  flex: 1;
+  display: flex;
+  flex-direction: column-reverse;
+  padding: 1rem;
+`;
+
+const dataItem = css`
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  background: #333;
+  border-radius: 1rem;
+  color: #fff;
+  width: 100%;
+  text-align: center;
+`;
+
+const formBox = css`
+  display: flex;
+  flex-direction: row;
+  padding: 1rem;
+  width: 100%;
+
+  & > *:not(:last-child) {
+    margin-right: 0.5rem;
+  }
+`;
 
 const StackBasic = () => {
   const [data, setData] = useState(stack.getItems());
@@ -45,11 +81,16 @@ const StackBasic = () => {
   };
 
   return (
-    <div>
-      {data.map((item, index) => (
-        <div key={index}>{item}</div>
-      ))}
+    <div css={box}>
+      <div css={dataBox}>
+        {data.map((item, index) => (
+          <div key={index} css={dataItem}>
+            STACK[{index}] {item}
+          </div>
+        ))}
+      </div>
       <form
+        css={formBox}
         onSubmit={(e) => {
           e.preventDefault();
           handlePush();
