@@ -8,7 +8,7 @@ import RouteList from "./RouteList";
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Global styles={resetCss} />
       <RouteList />
     </BrowserRouter>
