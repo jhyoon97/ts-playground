@@ -1,7 +1,7 @@
-export default class Queue {
-  items: Array<any> = [];
+export default class Queue<T> {
+  items: Array<T> = [];
 
-  enqueue(item: any) {
+  enqueue(item: T) {
     this.items.push(item);
   }
 
@@ -19,5 +19,13 @@ export default class Queue {
 
   getSize() {
     return this.items.length;
+  }
+
+  getItems() {
+    return [...this.items];
+  }
+
+  clear() {
+    this.items = [];
   }
 }

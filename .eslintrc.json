@@ -64,6 +64,10 @@
     // defaultProps 사용 안함
     "react/require-default-props": "off",
     // 함수 내에서 바로 리턴하는 경우에 괄호 검사 끄기
-    "arrow-body-style": "off"
+    "arrow-body-style": "off",
+    // 여러 클래스 한 파일에 허용
+    "max-classes-per-file": "off",
+    "no-plusplus": "off",
+    "no-console": "off"
   }
 }

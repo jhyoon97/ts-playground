@@ -9,8 +9,11 @@ import Button from "components/Button";
 // structures
 import Stack from "structures/Stack";
 
-const stack = new Stack();
-const charset = "0123456789ABCDEF";
+interface Process {
+  number: number;
+  quotient: number;
+  remainder: number;
+}
 
 const box = css`
   display: flex;
@@ -56,6 +59,9 @@ const formBox = css`
   }
 `;
 
+const stack = new Stack<Process>();
+const charset = "0123456789ABCDEF";
+
 const StackNumberBase = () => {
   const [result, setResult] = useState<string>("");
   const [process, setProcess] = useState<Array<any>>([]);
@@ -82,7 +88,11 @@ const StackNumberBase = () => {
     let resultString = "";
 
     while (!stack.getIsEmpty()) {
-      resultString += charset[stack.pop().remainder];
+      const poped = stack.pop();
+
+      if (poped) {
+        resultString += charset[poped.remainder];
+      }
     }
 
     setNumberInputSave(numberInput);

@@ -6,7 +6,7 @@ import { css } from "@emotion/react";
 import Button from "components/Button";
 
 // structures
-import Stack from "structures/Stack";
+import Queue from "structures/Queue";
 
 const box = css`
   display: flex;
@@ -18,17 +18,18 @@ const box = css`
 const dataBox = css`
   flex: 1;
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: row;
   padding: 1rem;
 `;
 
 const dataItem = css`
-  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  margin-right: 0.5rem;
   padding: 0.5rem;
   background: #333;
   border-radius: 1rem;
   color: #fff;
-  width: 100%;
   text-align: center;
 `;
 
@@ -43,43 +44,43 @@ const formBox = css`
   }
 `;
 
-const stack = new Stack<number>();
-let stackNumber = 0;
+const queue = new Queue<number>();
+let queueNumber = 0;
 
 const StackBasic = () => {
-  const [data, setData] = useState(stack.getItems());
+  const [data, setData] = useState(queue.getItems());
 
   useEffect(() => {
     return () => {
-      stack.clear();
+      queue.clear();
     };
   }, []);
 
-  const handlePush = () => {
-    stack.push(stackNumber++);
-    setData(stack.getItems());
+  const handleEnqueue = () => {
+    queue.enqueue(queueNumber++);
+    setData(queue.getItems());
   };
 
-  const handlePop = () => {
-    stack.pop();
-    setData(stack.getItems());
+  const handleDequeue = () => {
+    queue.dequeue();
+    setData(queue.getItems());
   };
 
-  const handlePeak = () => {
-    console.log(stack.getPeek());
+  const handleGetFirst = () => {
+    console.log(queue.getFirst());
   };
 
   const handleGetSize = () => {
-    console.log(stack.getSize());
+    console.log(queue.getSize());
   };
 
   const handlePrint = () => {
-    console.log(stack.getItems());
+    console.log(queue.getItems());
   };
 
   const handleClear = () => {
-    stack.clear();
-    setData(stack.getItems());
+    queue.clear();
+    setData(queue.getItems());
   };
 
   return (
@@ -87,7 +88,7 @@ const StackBasic = () => {
       <div css={dataBox}>
         {data.map((item) => (
           <div key={item} css={dataItem}>
-            STACK[{item}]
+            Queue[{item}]
           </div>
         ))}
       </div>
@@ -95,15 +96,15 @@ const StackBasic = () => {
         css={formBox}
         onSubmit={(e) => {
           e.preventDefault();
-          handlePush();
+          handleEnqueue();
         }}
       >
-        <Button type="submit">PUSH</Button>
-        <Button type="button" onClick={handlePop}>
-          POP
+        <Button type="submit">ENQUEUE</Button>
+        <Button type="button" onClick={handleDequeue}>
+          DEQUEUE
         </Button>
-        <Button type="button" onClick={handlePeak}>
-          PEAK
+        <Button type="button" onClick={handleGetFirst}>
+          FIRST
         </Button>
         <Button type="button" onClick={handleGetSize}>
           SIZE

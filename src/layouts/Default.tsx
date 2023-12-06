@@ -25,6 +25,7 @@ const Main = () => {
       <div css={side}>
         <NavLink to="/stack-basic">Stack - basic</NavLink>
         <NavLink to="/stack-number-base">Stack - 진수변환</NavLink>
+        <NavLink to="/queue-basic">Queue - basic</NavLink>
       </div>
 
       <div css={outletBox}>

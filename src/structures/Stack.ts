@@ -1,7 +1,7 @@
-export default class Stack {
-  items: Array<any> = [];
+export default class Stack<T> {
+  items: Array<T> = [];
 
-  push(element: any) {
+  push(element: T) {
     this.items.push(element);
   }
 
@@ -13,7 +13,7 @@ export default class Stack {
     this.items = [];
   }
 
-  getPeak() {
+  getPeek() {
     return this.items[this.items.length - 1];
   }
 
