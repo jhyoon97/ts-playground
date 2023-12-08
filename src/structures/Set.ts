@@ -1,4 +1,4 @@
-type Element = string | number;
+type Value = string | number;
 
 interface Items {
   [key: string]: string | number;
@@ -7,9 +7,9 @@ interface Items {
 export default class Set {
   items: Items = {};
 
-  add(element: Element) {
-    if (!this.has(element)) {
-      this.items[element] = element;
+  add(value: Value) {
+    if (!this.has(value)) {
+      this.items[value] = value;
 
       return true;
     }
@@ -17,9 +17,9 @@ export default class Set {
     return false;
   }
 
-  remove(element: Element) {
-    if (this.has(element)) {
-      delete this.items[element];
+  remove(value: Value) {
+    if (this.has(value)) {
+      delete this.items[value];
 
       return true;
     }
@@ -27,8 +27,8 @@ export default class Set {
     return false;
   }
 
-  has(element: Element) {
-    return element in this.items;
+  has(value: Value) {
+    return value in this.items;
   }
 
   clear() {
@@ -39,16 +39,16 @@ export default class Set {
     return Object.keys(this.items).length;
   }
 
-  getItems() {
+  getValues() {
     return Object.keys(this.items);
   }
 
   union(otherSet: Set) {
     // 합집합
     const newSet = new Set();
-    const items = this.getItems().concat(otherSet.getItems());
+    const values = this.getValues().concat(otherSet.getValues());
 
-    items.forEach((item) => newSet.add(item));
+    values.forEach((value) => newSet.add(value));
 
     return newSet;
   }
@@ -56,11 +56,11 @@ export default class Set {
   intersection(otherSet: Set) {
     // 교집합
     const newSet = new Set();
-    const items = this.getItems();
+    const values = this.getValues();
 
-    items.forEach((item) => {
-      if (otherSet.has(item)) {
-        newSet.add(item);
+    values.forEach((value) => {
+      if (otherSet.has(value)) {
+        newSet.add(value);
       }
     });
 
@@ -70,11 +70,11 @@ export default class Set {
   difference(otherSet: Set) {
     // 차집합
     const newSet = new Set();
-    const items = this.getItems();
+    const values = this.getValues();
 
-    items.forEach((item) => {
-      if (!otherSet.has(item)) {
-        newSet.add(item);
+    values.forEach((value) => {
+      if (!otherSet.has(value)) {
+        newSet.add(value);
       }
     });
 
@@ -86,9 +86,9 @@ export default class Set {
     const unionSet = this.union(otherSet);
     const newSet = new Set();
 
-    unionSet.getItems().forEach((item) => {
-      if (!intersectionSet.has(item)) {
-        newSet.add(item);
+    unionSet.getValues().forEach((value) => {
+      if (!intersectionSet.has(value)) {
+        newSet.add(value);
       }
     });
 
@@ -97,18 +97,18 @@ export default class Set {
 
   isSubset(otherSet: Set) {
     // 부분집합
-    const items = this.getItems();
+    const values = this.getValues();
 
-    return items.every((item) => otherSet.has(item));
+    return values.every((value) => otherSet.has(value));
   }
 
   isSuperset(otherSet: Set) {
-    const items = otherSet.getItems();
+    const values = otherSet.getValues();
 
-    return items.every((item) => this.has(item));
+    return values.every((value) => this.has(value));
   }
 
   isDisjoint(otherSet: Set) {
-    return this.getItems().every((item) => !otherSet.has(item));
+    return this.getValues().every((value) => !otherSet.has(value));
   }
 }

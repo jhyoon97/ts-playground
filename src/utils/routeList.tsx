@@ -6,6 +6,7 @@ import SingleLinkedList from "pages/SingleLinkedList";
 import DoublyLinkedList from "pages/DoublyLinkedList";
 import DoublyCircularLinkedList from "pages/DoublyCircularLinkedList";
 import Set from "pages/Set";
+import Map from "pages/Map";
 
 // types
 import { EmotionJSX } from "@emotion/react/types/jsx-namespace";
@@ -56,6 +57,11 @@ const routeList: Array<Route> = [
     path: "/set",
     title: "Set",
     component: <Set />,
+  },
+  {
+    path: "/map",
+    title: "Map",
+    component: <Map />,
   },
 ];
 
