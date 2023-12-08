@@ -1,24 +1,30 @@
-interface PriorityQueueElement<T> {
+class Element<T> {
   element: T;
+
   priority: number;
+
+  constructor(element: T, priority: number) {
+    this.element = element;
+    this.priority = priority;
+  }
 }
 
 export default class PriorityQueue<T> {
-  items: Array<PriorityQueueElement<T>> = [];
+  items: Array<Element<T>> = [];
 
-  enqueue(item: PriorityQueueElement<T>) {
+  enqueue(data: T, priority: number) {
     if (this.items.length === 0) {
-      this.items.push(item);
+      this.items.push(new Element(data, priority));
     } else {
       for (let i = 0; i < this.items.length; i += 1) {
-        if (item.priority < this.items[i].priority) {
-          this.items.splice(i, 0, item);
+        if (priority < this.items[i].priority) {
+          this.items.splice(i, 0, new Element(data, priority));
 
           return;
         }
       }
 
-      this.items.push(item);
+      this.items.push(new Element(data, priority));
     }
   }
 

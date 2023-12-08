@@ -6,6 +6,7 @@ import StackBasic from "pages/StackBasic";
 import StackNumberBase from "pages/StackNumberBase";
 import QueueBasic from "pages/QueueBasic";
 import PriorityQueue from "pages/PriorityQueue";
+import SingleLinkedList from "pages/SingleLinkedList";
 
 const RouteList = () => {
   return (
@@ -15,6 +16,7 @@ const RouteList = () => {
         <Route path="/stack-number-base" element={<StackNumberBase />} />
         <Route path="/queue-basic" element={<QueueBasic />} />
         <Route path="/priority-queue" element={<PriorityQueue />} />
+        <Route path="/single-linked-list" element={<SingleLinkedList />} />
       </Route>
     </Routes>
   );

@@ -57,10 +57,7 @@ const StackBasic = () => {
   }, []);
 
   const handleEnqueue = (priority: number) => {
-    queue.enqueue({
-      priority,
-      element: queueNumber++,
-    });
+    queue.enqueue(queueNumber++, priority);
     setData(queue.getItems());
   };
 
