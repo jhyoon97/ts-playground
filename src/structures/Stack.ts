@@ -1,5 +1,5 @@
 export default class Stack<T> {
-  items: Array<T> = [];
+  private items: Array<T> = [];
 
   push(element: T) {
     this.items.push(element);

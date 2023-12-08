@@ -2,7 +2,7 @@
 import { css } from "@emotion/react";
 
 // structures
-import SingleLinkedList from "structures/SingleLinkedList";
+import DoublyLinkedList from "structures/DoublyLinkedList";
 
 const box = css`
   display: flex;
@@ -11,10 +11,10 @@ const box = css`
   height: 100vh;
 `;
 
-const list = new SingleLinkedList<number>();
+const list = new DoublyLinkedList<number>();
 
-const SingleLinkedListPage = () => {
+const DoublyLinkedListPAge = () => {
   return <div css={box} />;
 };
 
-export default SingleLinkedListPage;
+export default DoublyLinkedListPAge;

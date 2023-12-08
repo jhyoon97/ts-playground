@@ -47,7 +47,7 @@ const queue = new PriorityQueue<number>();
 let queueNumber = 0;
 const colors = ["red", "orange", "green", "purple"];
 
-const StackBasic = () => {
+const PriorityQueuePage = () => {
   const [data, setData] = useState(queue.getItems());
 
   useEffect(() => {
@@ -131,4 +131,4 @@ const StackBasic = () => {
   );
 };
 
-export default StackBasic;
+export default PriorityQueuePage;

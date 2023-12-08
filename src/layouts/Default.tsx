@@ -1,6 +1,9 @@
 import { NavLink, Outlet } from "react-router-dom";
 import { css } from "@emotion/react";
 
+// utils
+import routeList from "utils/routeList";
+
 const box = css`
   display: flex;
   flex-direction: row;
@@ -15,6 +18,14 @@ const side = css`
   border-right: 1px solid #000;
 `;
 
+const navItem = css`
+  color: #000;
+
+  &.active {
+    color: green;
+  }
+`;
+
 const outletBox = css`
   flex: 1;
 `;
@@ -23,11 +34,11 @@ const Main = () => {
   return (
     <div css={box}>
       <div css={side}>
-        <NavLink to="/stack-basic">Stack - basic</NavLink>
-        <NavLink to="/stack-number-base">Stack - 진수변환</NavLink>
-        <NavLink to="/queue-basic">Queue - basic</NavLink>
-        <NavLink to="/priority-queue">우선순위 Queue</NavLink>
-        <NavLink to="/single-linked-list">단방향 링크드 리스트</NavLink>
+        {routeList.map((route) => (
+          <NavLink key={route.path} css={navItem} to={route.path}>
+            {route.title}
+          </NavLink>
+        ))}
       </div>
 
       <div css={outletBox}>

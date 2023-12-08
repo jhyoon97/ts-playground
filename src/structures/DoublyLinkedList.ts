@@ -1,6 +1,8 @@
 class Node<T> {
   element: T;
 
+  prev: null | Node<T> = null;
+
   next: null | Node<T> = null;
 
   constructor(element: T) {
@@ -8,16 +10,19 @@ class Node<T> {
   }
 }
 
-export default class SingleLinkedList<T> {
+export default class DoublyLinkedList<T> {
   private length = 0;
 
   private head: Node<T> | null = null;
+
+  private tail: Node<T> | null = null;
 
   append(element: T) {
     const newNode = new Node(element);
 
     if (this.head === null) {
       this.head = newNode;
+      this.tail = newNode;
     } else {
       let currentNode = this.head;
 
@@ -26,18 +31,25 @@ export default class SingleLinkedList<T> {
       }
 
       currentNode.next = newNode;
+      newNode.prev = currentNode;
+      this.tail = newNode;
     }
 
     this.length++;
   }
 
   insert(index: number, element: T) {
-    if (index >= 0 && index <= this.length && this.head) {
+    if (index >= 0 && index <= this.length && this.head && this.tail) {
       const newNode = new Node(element);
 
       if (index === 0) {
         newNode.next = this.head;
+        this.head.prev = newNode;
         this.head = newNode;
+      } else if (index === this.length) {
+        newNode.prev = this.tail;
+        this.tail.next = newNode;
+        this.tail = newNode;
       } else {
         let currentIndex = 0;
         let currentNode: Node<T> | null = this.head;
@@ -50,6 +62,10 @@ export default class SingleLinkedList<T> {
 
         if (previousNode) {
           previousNode.next = newNode;
+          newNode.prev = previousNode;
+          if (currentNode) {
+            currentNode.prev = newNode;
+          }
           newNode.next = currentNode;
 
           this.length++;
@@ -63,9 +79,17 @@ export default class SingleLinkedList<T> {
   }
 
   removeAt(index: number) {
-    if (index >= 0 && index <= this.length && this.head) {
+    if (index >= 0 && index <= this.length && this.head && this.tail) {
       if (index === 0) {
+        if (this.head.next) {
+          this.head.next.prev = null;
+        }
         this.head = this.head.next;
+      } else if (index === this.length) {
+        if (this.tail.prev) {
+          this.tail.prev.next = null;
+          this.tail = this.tail.prev;
+        }
       } else {
         let currentIndex = 0;
         let currentNode: Node<T> | null = this.head;
@@ -78,6 +102,9 @@ export default class SingleLinkedList<T> {
 
         if (previousNode && currentNode) {
           previousNode.next = currentNode.next;
+          if (currentNode.next) {
+            currentNode.next.prev = previousNode;
+          }
         }
       }
 

@@ -1,5 +1,5 @@
 export default class Queue<T> {
-  items: Array<T> = [];
+  private items: Array<T> = [];
 
   enqueue(item: T) {
     this.items.push(item);

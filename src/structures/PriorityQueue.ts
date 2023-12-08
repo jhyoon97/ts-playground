@@ -10,15 +10,17 @@ class Element<T> {
 }
 
 export default class PriorityQueue<T> {
-  items: Array<Element<T>> = [];
+  private items: Array<Element<T>> = [];
 
   enqueue(data: T, priority: number) {
+    const newItem = new Element(data, priority);
+
     if (this.items.length === 0) {
-      this.items.push(new Element(data, priority));
+      this.items.push(newItem);
     } else {
       for (let i = 0; i < this.items.length; i += 1) {
         if (priority < this.items[i].priority) {
-          this.items.splice(i, 0, new Element(data, priority));
+          this.items.splice(i, 0, newItem);
 
           return;
         }

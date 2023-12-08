@@ -47,7 +47,7 @@ const formBox = css`
 const queue = new Queue<number>();
 let queueNumber = 0;
 
-const StackBasic = () => {
+const QueueBasic = () => {
   const [data, setData] = useState(queue.getItems());
 
   useEffect(() => {
@@ -120,4 +120,4 @@ const StackBasic = () => {
   );
 };
 
-export default StackBasic;
+export default QueueBasic;
