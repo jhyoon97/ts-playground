@@ -86,24 +86,9 @@ export default class SingleLinkedList<T> {
   }
 
   remove(element: T) {
-    if (this.head) {
-      let previousNode = this.head;
-      let currentNode: Node<T> | null = this.head;
+    const index = this.indexOf(element);
 
-      while (currentNode) {
-        if (currentNode.element === element) {
-          previousNode.next = currentNode.next;
-
-          return true;
-        }
-        previousNode = currentNode;
-        currentNode = currentNode.next;
-      }
-
-      return false;
-    }
-
-    return false;
+    return this.removeAt(index);
   }
 
   indexOf(element: T) {
