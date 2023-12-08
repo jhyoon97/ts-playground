@@ -2,7 +2,7 @@
 import { css } from "@emotion/react";
 
 // structures
-import DoublyLinkedList from "structures/DoublyLinkedList";
+import DoublyCircularLinkedList from "structures/DoublyCircularLinkedList";
 
 const box = css`
   display: flex;
@@ -11,10 +11,10 @@ const box = css`
   height: 100vh;
 `;
 
-const list = new DoublyLinkedList<number>();
+const list = new DoublyCircularLinkedList<number>();
 
-const DoublyLinkedListPage = () => {
+const DoublyCircularLinkedListPage = () => {
   return <div css={box} />;
 };
 
-export default DoublyLinkedListPage;
+export default DoublyCircularLinkedListPage;

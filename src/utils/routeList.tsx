@@ -4,6 +4,7 @@ import QueueBasic from "pages/QueueBasic";
 import PriorityQueue from "pages/PriorityQueue";
 import SingleLinkedList from "pages/SingleLinkedList";
 import DoublyLinkedList from "pages/DoublyLinkedList";
+import DoublyCircularLinkedList from "pages/DoublyCircularLinkedList";
 
 // types
 import { EmotionJSX } from "@emotion/react/types/jsx-namespace";
@@ -44,6 +45,11 @@ const routeList: Array<Route> = [
     path: "/doubly-linked-list",
     title: "양방향 링크드 리스트",
     component: <DoublyLinkedList />,
+  },
+  {
+    path: "/doubly-circular-linked-list",
+    title: "양방향+순환 링크드 리스트",
+    component: <DoublyCircularLinkedList />,
   },
 ];
 

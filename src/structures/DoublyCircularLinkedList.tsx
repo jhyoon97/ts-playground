@@ -10,7 +10,7 @@ class Node<T> {
   }
 }
 
-export default class DoublyLinkedList<T> {
+export default class DoublyCircularLinkedList<T> {
   private length = 0;
 
   private head: Node<T> | null = null;
@@ -26,13 +26,15 @@ export default class DoublyLinkedList<T> {
     } else {
       let currentNode = this.head;
 
-      while (currentNode.next) {
+      while (currentNode.next && currentNode.next !== this.head) {
         currentNode = currentNode.next;
       }
 
       currentNode.next = newNode;
       newNode.prev = currentNode;
+      newNode.next = this.head;
       this.tail = newNode;
+      this.head.prev = newNode;
     }
 
     this.length++;
@@ -44,12 +46,16 @@ export default class DoublyLinkedList<T> {
 
       if (index === 0) {
         newNode.next = this.head;
+        newNode.prev = this.tail;
         this.head.prev = newNode;
         this.head = newNode;
+        this.tail.next = this.head;
       } else if (index === this.length) {
         newNode.prev = this.tail;
+        newNode.next = this.head;
         this.tail.next = newNode;
         this.tail = newNode;
+        this.head.prev = this.tail;
       } else {
         let currentIndex = 0;
         let currentNode: Node<T> | null = this.head;
@@ -82,14 +88,16 @@ export default class DoublyLinkedList<T> {
     if (index >= 0 && index < this.length && this.head && this.tail) {
       if (index === 0) {
         if (this.head.next) {
-          this.head.next.prev = null;
+          this.head.next.prev = this.tail;
         }
         this.head = this.head.next;
+        this.tail.next = this.head;
       } else if (index === this.length - 1) {
         if (this.tail.prev) {
-          this.tail.prev.next = null;
+          this.tail.prev.next = this.head;
         }
         this.tail = this.tail.prev;
+        this.head.prev = this.tail;
       } else {
         let currentIndex = 0;
         let currentNode: Node<T> | null = this.head;
@@ -154,6 +162,10 @@ export default class DoublyLinkedList<T> {
     while (currentNode) {
       items.push(currentNode);
 
+      if (currentNode === this.tail) {
+        break;
+      }
+
       currentNode = currentNode.next;
     }
 
@@ -162,9 +174,5 @@ export default class DoublyLinkedList<T> {
 
   getHead() {
     return this.head;
-  }
-
-  getTail() {
-    return this.tail;
   }
 }
