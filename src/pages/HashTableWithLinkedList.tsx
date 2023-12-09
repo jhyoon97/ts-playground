@@ -2,7 +2,7 @@
 import { css } from "@emotion/react";
 
 // structures
-import CollisionHashTable from "structures/CollisionHashTable";
+import HashTableWithLinkedList from "structures/HashTableWithLinkedList";
 
 const box = css`
   display: flex;
@@ -11,17 +11,19 @@ const box = css`
   height: 100vh;
 `;
 
-const table = new CollisionHashTable();
-/* table.set("Gandalf", "gandalf@email.com");
+const table = new HashTableWithLinkedList();
+table.set("Gandalf", "gandalf@email.com");
 table.set("John", "john@email.com");
 table.set("Tyrion", "tyrion@email.com");
 
 table.set("asd", "collision!!!!!!!!");
 
-console.log(table.getTable()); */
+table.remove("asd");
 
-const CollisionHashTablePage = () => {
+console.log(table.getTable());
+
+const HashTableWithLinkedListPage = () => {
   return <div css={box} />;
 };
 
-export default CollisionHashTablePage;
+export default HashTableWithLinkedListPage;

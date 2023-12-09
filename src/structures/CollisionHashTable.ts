@@ -1,4 +1,4 @@
-export default class HashTable<T> {
+export default class CollisionHashTable<T> {
   table: Array<T | undefined> = [];
 
   set(key: string, value: T) {
@@ -18,6 +18,7 @@ export default class HashTable<T> {
   }
 
   private hash(key: string) {
+    // 책 139페이지
     let hash = 0;
 
     for (let i = 0; i < key.length; i++) {

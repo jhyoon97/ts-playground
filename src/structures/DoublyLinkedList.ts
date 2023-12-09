@@ -67,11 +67,10 @@ export default class DoublyLinkedList<T> {
             currentNode.prev = newNode;
           }
           newNode.next = currentNode;
-
-          this.length++;
         }
       }
 
+      this.length++;
       return true;
     }
 
@@ -108,6 +107,7 @@ export default class DoublyLinkedList<T> {
         }
       }
 
+      this.length--;
       return true;
     }
 

@@ -73,11 +73,10 @@ export default class DoublyCircularLinkedList<T> {
             currentNode.prev = newNode;
           }
           newNode.next = currentNode;
-
-          this.length++;
         }
       }
 
+      this.length++;
       return true;
     }
 
@@ -116,6 +115,7 @@ export default class DoublyCircularLinkedList<T> {
         }
       }
 
+      this.length--;
       return true;
     }
 

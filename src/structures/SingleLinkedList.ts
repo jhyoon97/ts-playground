@@ -8,6 +8,10 @@ class Node<T> {
   }
 }
 
+interface FindIndex<T> {
+  (element: T): boolean;
+}
+
 export default class SingleLinkedList<T> {
   private length = 0;
 
@@ -51,11 +55,10 @@ export default class SingleLinkedList<T> {
         if (previousNode) {
           previousNode.next = newNode;
           newNode.next = currentNode;
-
-          this.length++;
         }
       }
 
+      this.length++;
       return true;
     }
 
@@ -81,6 +84,7 @@ export default class SingleLinkedList<T> {
         }
       }
 
+      this.length--;
       return true;
     }
 
@@ -110,6 +114,43 @@ export default class SingleLinkedList<T> {
     }
 
     return -1;
+  }
+
+  findIndex(callbacnFunction: FindIndex<Node<T>>) {
+    if (this.head) {
+      let currentNode: Node<T> | null = this.head;
+      let currentIndex = 0;
+
+      while (currentNode) {
+        if (callbacnFunction(currentNode)) {
+          return currentIndex;
+        }
+        currentNode = currentNode.next;
+        currentIndex++;
+      }
+
+      return -1;
+    }
+
+    return -1;
+  }
+
+  getNode(index: number) {
+    if (this.head) {
+      let currentNode: Node<T> | null = this.head;
+      let currentIndex = 0;
+
+      while (currentNode && currentIndex <= index) {
+        if (currentIndex === index) {
+          return currentNode;
+        }
+
+        currentNode = currentNode.next;
+        currentIndex++;
+      }
+    }
+
+    return undefined;
   }
 
   getIsEmpty() {
