@@ -7,6 +7,7 @@ import DoublyLinkedList from "pages/DoublyLinkedList";
 import DoublyCircularLinkedList from "pages/DoublyCircularLinkedList";
 import Set from "pages/Set";
 import Map from "pages/Map";
+import CollisionHashTable from "pages/CollisionHashTable";
 
 // types
 import { EmotionJSX } from "@emotion/react/types/jsx-namespace";
@@ -62,6 +63,11 @@ const routeList: Array<Route> = [
     path: "/map",
     title: "Map",
     component: <Map />,
+  },
+  {
+    path: "/collision-hash-table",
+    title: "충돌이 잘 일어나는 HashTable",
+    component: <CollisionHashTable />,
   },
 ];
 
