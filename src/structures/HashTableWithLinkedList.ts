@@ -23,7 +23,7 @@ export default class HashTableWithLinkedList<T> {
       list.append(newElement);
     } else {
       const newList = new SingleLinkedList<Element<T>>();
-      this.table[hashedIndex] = list;
+      this.table[hashedIndex] = newList;
       newList.append(newElement);
     }
   }
@@ -37,6 +37,10 @@ export default class HashTableWithLinkedList<T> {
 
       if (findIndex > -1) {
         list.removeAt(findIndex);
+
+        if (list.getIsEmpty()) {
+          this.table[hashedIndex] = undefined;
+        }
 
         return true;
       }
@@ -56,7 +60,7 @@ export default class HashTableWithLinkedList<T> {
       const findIndex = list.findIndex((node) => node.element.key === key);
 
       if (findIndex > -1) {
-        return list.getNode(findIndex);
+        return list.getNode(findIndex)?.element.value;
       }
     }
   }
