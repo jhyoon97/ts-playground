@@ -17,13 +17,14 @@ export default class HashTableWithLinkedList<T> {
   set(key: string, value: T) {
     const hashedIndex = this.hash(key);
     const newElement = new Element(key, value);
+    const list = this.table[hashedIndex];
 
-    if (this.table[hashedIndex]) {
-      this.table[hashedIndex]?.append(newElement);
-    } else {
-      const list = new SingleLinkedList<Element<T>>();
-      this.table[hashedIndex] = list;
+    if (list) {
       list.append(newElement);
+    } else {
+      const newList = new SingleLinkedList<Element<T>>();
+      this.table[hashedIndex] = list;
+      newList.append(newElement);
     }
   }
 
