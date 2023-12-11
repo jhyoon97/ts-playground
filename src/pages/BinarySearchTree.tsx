@@ -32,8 +32,6 @@ tree.insert(6);
 tree.remove(15);
 tree.insert(19); */
 
-console.log(tree.root);
-
 const BinarySearchTreePage = () => {
   return <div css={box} />;
 };
