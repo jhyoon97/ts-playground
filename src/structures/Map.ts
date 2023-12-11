@@ -1,7 +1,7 @@
 type Value = string | number;
 
 interface Items {
-  [key: string]: string | number;
+  [key: string]: Value;
 }
 
 export default class Map {

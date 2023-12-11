@@ -1,12 +1,14 @@
 class Node<T> {
   element: T;
 
-  prev: null | Node<T> = null;
+  prev: null | Node<T>;
 
-  next: null | Node<T> = null;
+  next: null | Node<T>;
 
   constructor(element: T) {
     this.element = element;
+    this.prev = null;
+    this.next = null;
   }
 }
 

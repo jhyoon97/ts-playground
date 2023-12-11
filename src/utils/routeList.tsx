@@ -9,6 +9,7 @@ import Set from "pages/Set";
 import Map from "pages/Map";
 import CollisionHashTable from "pages/CollisionHashTable";
 import HashTableWithLinkedList from "pages/HashTableWithLinkedList";
+import BinarySearchTree from "pages/BinarySearchTree";
 
 // types
 import { EmotionJSX } from "@emotion/react/types/jsx-namespace";
@@ -74,6 +75,11 @@ const routeList: Array<Route> = [
     path: "/hash-table-with-linked-list",
     title: "링크드리스트로 충돌을 개선한 HashTable",
     component: <HashTableWithLinkedList />,
+  },
+  {
+    path: "/binary-search-tree",
+    title: "이진 트리",
+    component: <BinarySearchTree />,
   },
 ];
 
