@@ -11,7 +11,7 @@ const box = css`
   height: 100vh;
 `;
 
-const map = new Map();
+const map = new Map<string>();
 
 const MapPage = () => {
   return <div css={box} />;

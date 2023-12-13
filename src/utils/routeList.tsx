@@ -13,6 +13,7 @@ import BinarySearchTree from "pages/BinarySearchTree";
 
 // types
 import { EmotionJSX } from "@emotion/react/types/jsx-namespace";
+import Graph from "pages/Graph";
 
 interface Route {
   path: string;
@@ -80,6 +81,12 @@ const routeList: Array<Route> = [
     path: "/binary-search-tree",
     title: "이진 트리",
     component: <BinarySearchTree />,
+  },
+
+  {
+    path: "/graph",
+    title: "그래프",
+    component: <Graph />,
   },
 ];
 

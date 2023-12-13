@@ -1,13 +1,11 @@
-type Value = string | number;
-
-interface Items {
-  [key: string]: Value;
+interface Items<T> {
+  [key: string]: T;
 }
 
-export default class Map {
-  items: Items = {};
+export default class Map<T> {
+  items: Items<T> = {};
 
-  set(key: string, value: Value) {
+  set(key: string, value: T) {
     this.items[key] = value;
   }
 
