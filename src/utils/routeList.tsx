@@ -12,13 +12,13 @@ import HashTableWithLinkedList from "pages/HashTableWithLinkedList";
 import BinarySearchTree from "pages/BinarySearchTree";
 
 // types
-import { EmotionJSX } from "@emotion/react/types/jsx-namespace";
+import type { ReactNode } from "react";
 import Graph from "pages/Graph";
 
 interface Route {
   path: string;
   title: string;
-  component: EmotionJSX.Element;
+  component: ReactNode;
 }
 
 const routeList: Array<Route> = [
