@@ -1,21 +1,16 @@
-# 리액트 + Typescript SPA 보일러플레이트
+# 자료구조 & 알고리즘
 
 ## 1. 패키지매니저
 
-- yarn berry
-  - zero-install 사용
-  - pnp 사용
+yarn
 
 ## 2. 코드 스타일
 
 - eslint(airbnb)
 - prettier
 
-## 3. packages
+## 3. Stack
 
-- axios
 - dayjs
-- redux & toolkit
 - emotion
-- react-query
 - react-router-dom
