@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/data-structures-and-algorithms/static/js/main.961bd48f.js",
+    "main.js": "/data-structures-and-algorithms/static/js/main.6775c206.js",
     "index.html": "/data-structures-and-algorithms/index.html",
-    "main.961bd48f.js.map": "/data-structures-and-algorithms/static/js/main.961bd48f.js.map"
+    "main.6775c206.js.map": "/data-structures-and-algorithms/static/js/main.6775c206.js.map"
   },
   "entrypoints": [
-    "static/js/main.961bd48f.js"
+    "static/js/main.6775c206.js"
   ]
 }
