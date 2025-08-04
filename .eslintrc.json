@@ -49,8 +49,6 @@
     "import/no-extraneous-dependencies": "off",
     // prettier는 자동 저장으로 포맷팅 역할만 맡김
     "prettier/prettier": "off",
-    // emotion을 위해 css만 규칙 무시하도록 설정
-    "react/no-unknown-property": ["error", { "ignore": ["css"] }],
     // props에 spread 연산 허용
     "react/jsx-props-no-spreading": "off",
     // Typescript any 허용 (any는 지양)

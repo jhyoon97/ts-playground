@@ -1,187 +1,74 @@
-interface TraverseCallback<T> {
-  (node: Node<T>): void;
-}
+class Vertex {
+  id: number;
 
-class Node<T> {
-  key: T;
+  left: Vertex | null;
 
-  left: Node<T> | null;
+  right: Vertex | null;
 
-  right: Node<T> | null;
-
-  constructor(key: T) {
-    this.key = key;
+  constructor(id: number) {
+    this.id = id;
     this.left = null;
     this.right = null;
   }
 }
 
-export default class BinarySearchTree<T> {
-  root: Node<T> | null = null;
+export class BinarySearchTree {
+  root: Vertex;
 
-  insert(key: T) {
-    const newNode = new Node(key);
+  constructor(id: number) {
+    this.root = new Vertex(id);
+  }
 
-    if (this.root) {
-      this.insertNode(this.root, newNode);
+  add(newId: number, vertex?: Vertex) {
+    let target = null;
+
+    if (!vertex) {
+      target = this.root;
     } else {
-      this.root = newNode;
+      target = vertex;
     }
-  }
 
-  has(key: T) {
-    this.hasNode(this.root, key);
-  }
-
-  inOrderTraverse(callback: TraverseCallback<T>) {
-    this.inOrderTraverseNode(this.root, callback);
-  }
-
-  preOrderTraverse(callback: TraverseCallback<T>) {
-    this.preOrderTraverseNode(this.root, callback);
-  }
-
-  postOrderTraverse(callback: TraverseCallback<T>) {
-    this.postOrderTraverseNode(this.root, callback);
-  }
-
-  min() {
-    return this.minNode(this.root);
-  }
-
-  max() {
-    return this.maxNode(this.root);
-  }
-
-  remove(key: T) {
-    this.root = this.removeNode(this.root, key);
-  }
-
-  private insertNode(node: Node<T>, newNode: Node<T>) {
-    if (node.key > newNode.key) {
-      if (node.left) {
-        this.insertNode(node.left, newNode);
+    if (newId < target.id) {
+      if (target.left) {
+        this.add(newId, target.left);
       } else {
-        node.left = newNode;
+        target.left = new Vertex(newId);
       }
-    } else if (node.key < newNode.key) {
-      if (node.right) {
-        this.insertNode(node.right, newNode);
+    } else if (newId > target.id) {
+      if (target.right) {
+        this.add(newId, target.right);
       } else {
-        node.right = newNode;
+        target.right = new Vertex(newId);
       }
     }
   }
 
-  private inOrderTraverseNode(
-    node: Node<T> | null,
-    callback: TraverseCallback<T>
-  ) {
-    if (node) {
-      this.inOrderTraverseNode(node.left, callback);
-      callback(node);
-      this.inOrderTraverseNode(node.right, callback);
-    }
-  }
+  bfs(callback: (vertex: Vertex, level?: number) => void) {
+    let queueStartIndex = 0;
+    const queue: Array<[Vertex, number]> = [[this.root, 0]];
 
-  private preOrderTraverseNode(
-    node: Node<T> | null,
-    callback: TraverseCallback<T>
-  ) {
-    if (node) {
-      callback(node);
-      this.preOrderTraverseNode(node.left, callback);
-      this.preOrderTraverseNode(node.right, callback);
-    }
-  }
+    while (queueStartIndex < queue.length) {
+      const [currentVertex, currentLevel] = queue[queueStartIndex++];
 
-  private postOrderTraverseNode(
-    node: Node<T> | null,
-    callback: TraverseCallback<T>
-  ) {
-    if (node) {
-      this.postOrderTraverseNode(node.left, callback);
-      this.postOrderTraverseNode(node.right, callback);
-      callback(node);
-    }
-  }
-
-  private minNode(node: Node<T> | null) {
-    if (node) {
-      let currentNode = node;
-
-      while (currentNode && currentNode.left) {
-        currentNode = currentNode.left;
+      if (
+        currentVertex.left &&
+        !queue.find(
+          ([visitVertex]) => visitVertex.id === currentVertex.left?.id
+        )
+      ) {
+        queue.push([currentVertex.left, currentLevel + 1]);
       }
 
-      return currentNode;
+      if (
+        currentVertex.right &&
+        !queue.find(
+          ([visitVertex]) => visitVertex.id === currentVertex.right?.id
+        )
+      ) {
+        queue.push([currentVertex.right, currentLevel + 1]);
+      }
+
+      callback(currentVertex, currentLevel);
     }
-
-    return null;
-  }
-
-  private maxNode(node: Node<T> | null) {
-    if (node) {
-      let currentNode = node;
-
-      while (currentNode && currentNode.right) {
-        currentNode = currentNode.right;
-      }
-
-      return currentNode;
-    }
-
-    return null;
-  }
-
-  private hasNode(node: Node<T> | null, key: T): boolean {
-    if (!node) {
-      return false;
-    }
-
-    if (node.key === key) {
-      return true;
-    }
-
-    if (node.key > key) {
-      return this.hasNode(node.left, key);
-    }
-
-    return this.hasNode(node.right, key);
-  }
-
-  private removeNode(node: Node<T> | null, key: T): Node<T> | null {
-    if (node) {
-      if (node.key > key) {
-        node.left = this.removeNode(node.left, key);
-        return node;
-      }
-
-      if (node.key < key) {
-        node.right = this.removeNode(node.right, key);
-        return node;
-      }
-
-      if (node.left === null && node.right === null) {
-        return null;
-      }
-
-      if (node.left === null) {
-        return node.right;
-      }
-
-      if (node.right === null) {
-        return node.left;
-      }
-
-      const replaceNode = this.minNode(node.right);
-      if (replaceNode) {
-        node.key = replaceNode.key;
-        node.right = this.removeNode(node.right, replaceNode.key);
-        return node;
-      }
-    }
-
-    return null;
   }
 }

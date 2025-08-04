@@ -1,18 +1,24 @@
-import { BrowserRouter } from "react-router-dom";
-import { Global } from "@emotion/react";
+import { useEffect } from "react";
 
-// utils
-import resetCss from "utils/resetCss";
-
-import RouteList from "./RouteList";
+import { BinarySearchTree } from "structures/BinarySearchTree";
 
 const App = () => {
-  return (
-    <BrowserRouter basename={process.env.PUBLIC_URL}>
-      <Global styles={resetCss} />
-      <RouteList />
-    </BrowserRouter>
-  );
+  useEffect(() => {
+    const bst = new BinarySearchTree(50);
+
+    bst.add(25);
+    bst.add(12);
+    bst.add(37);
+    bst.add(75);
+    bst.add(63);
+    bst.add(87);
+
+    bst.bfs((vertex, level) => {
+      console.log(vertex.id, level);
+    });
+  }, []);
+
+  return <div />;
 };
 
 export default App;
