@@ -11,7 +11,6 @@ class Vertex {
     this.right = null;
   }
 }
-
 export class BinarySearchTree {
   root: Vertex;
 
@@ -49,6 +48,7 @@ export class BinarySearchTree {
 
     while (queueStartIndex < queue.length) {
       const [currentVertex, currentLevel] = queue[queueStartIndex++];
+      callback(currentVertex, currentLevel);
 
       if (
         currentVertex.left &&
@@ -67,8 +67,51 @@ export class BinarySearchTree {
       ) {
         queue.push([currentVertex.right, currentLevel + 1]);
       }
-
-      callback(currentVertex, currentLevel);
     }
+  }
+
+  preorder(callback: (vertex: Vertex) => void) {
+    const traverse = (
+      _callback: (vertex: Vertex) => void,
+      vertex: Vertex | null
+    ) => {
+      if (vertex) {
+        _callback(vertex);
+        traverse(_callback, vertex.left);
+        traverse(_callback, vertex.right);
+      }
+    };
+
+    traverse(callback, this.root);
+  }
+
+  inorder(callback: (vertex: Vertex) => void, node?: Vertex) {
+    const traverse = (
+      _callback: (vertex: Vertex) => void,
+      vertex: Vertex | null
+    ) => {
+      if (vertex) {
+        traverse(_callback, vertex.left);
+        _callback(vertex);
+        traverse(_callback, vertex.right);
+      }
+    };
+
+    traverse(callback, this.root);
+  }
+
+  postorder(callback: (vertex: Vertex) => void, node?: Vertex) {
+    const traverse = (
+      _callback: (vertex: Vertex) => void,
+      vertex: Vertex | null
+    ) => {
+      if (vertex) {
+        traverse(_callback, vertex.left);
+        traverse(_callback, vertex.right);
+        _callback(vertex);
+      }
+    };
+
+    traverse(callback, this.root);
   }
 }

@@ -13,8 +13,8 @@ const App = () => {
     bst.add(63);
     bst.add(87);
 
-    bst.bfs((vertex, level) => {
-      console.log(vertex.id, level);
+    bst.postorder((vertex) => {
+      console.log(vertex.id);
     });
   }, []);
 
