@@ -42,6 +42,24 @@ export class BinarySearchTree {
     }
   }
 
+  has(id: number) {
+    let target: Vertex | null = this.root;
+
+    while (target) {
+      if (id === target.id) {
+        return true;
+      }
+
+      if (id < target.id) {
+        target = target.left;
+      } else {
+        target = target.right;
+      }
+    }
+
+    return false;
+  }
+
   bfs(callback: (vertex: Vertex, level?: number) => void) {
     let queueStartIndex = 0;
     const queue: Array<[Vertex, number]> = [[this.root, 0]];
@@ -75,11 +93,9 @@ export class BinarySearchTree {
       _callback: (vertex: Vertex) => void,
       vertex: Vertex | null
     ) => {
-      if (vertex) {
-        _callback(vertex);
-        traverse(_callback, vertex.left);
-        traverse(_callback, vertex.right);
-      }
+      if (vertex) _callback(vertex);
+      if (vertex?.left) traverse(_callback, vertex.left);
+      if (vertex?.right) traverse(_callback, vertex.right);
     };
 
     traverse(callback, this.root);
@@ -90,11 +106,9 @@ export class BinarySearchTree {
       _callback: (vertex: Vertex) => void,
       vertex: Vertex | null
     ) => {
-      if (vertex) {
-        traverse(_callback, vertex.left);
-        _callback(vertex);
-        traverse(_callback, vertex.right);
-      }
+      if (vertex?.left) traverse(_callback, vertex.left);
+      if (vertex) _callback(vertex);
+      if (vertex?.right) traverse(_callback, vertex.right);
     };
 
     traverse(callback, this.root);
@@ -105,11 +119,9 @@ export class BinarySearchTree {
       _callback: (vertex: Vertex) => void,
       vertex: Vertex | null
     ) => {
-      if (vertex) {
-        traverse(_callback, vertex.left);
-        traverse(_callback, vertex.right);
-        _callback(vertex);
-      }
+      if (vertex?.left) traverse(_callback, vertex.left);
+      if (vertex?.right) traverse(_callback, vertex.right);
+      if (vertex) _callback(vertex);
     };
 
     traverse(callback, this.root);

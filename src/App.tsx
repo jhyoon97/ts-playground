@@ -13,9 +13,7 @@ const App = () => {
     bst.add(63);
     bst.add(87);
 
-    bst.postorder((vertex) => {
-      console.log(vertex.id);
-    });
+    bst.postorder((vertex) => console.log(vertex.id));
   }, []);
 
   return <div />;
