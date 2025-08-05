@@ -67,6 +67,7 @@
     "max-classes-per-file": "off",
     "no-plusplus": "off",
     "no-console": "off",
-    "class-methods-use-this": "off"
+    "class-methods-use-this": "off",
+    "react/no-array-index-key": "off"
   }
 }

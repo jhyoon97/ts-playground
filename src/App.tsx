@@ -1,8 +1,15 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import { BinarySearchTree } from "structures/BinarySearchTree";
 
 const App = () => {
+  const [logs, setLogs] = useState<any[]>([]);
+
+  const log = (newLog: any) => {
+    console.log(newLog);
+    setLogs((prev) => prev.concat(newLog));
+  };
+
   useEffect(() => {
     const bst = new BinarySearchTree(50);
 
@@ -13,10 +20,16 @@ const App = () => {
     bst.add(63);
     bst.add(87);
 
-    bst.postorder((vertex) => console.log(vertex.id));
+    bst.postorder((vertex) => log(vertex.id));
   }, []);
 
-  return <div />;
+  return (
+    <div>
+      {logs.map((item, index) => (
+        <p key={index}>{item}</p>
+      ))}
+    </div>
+  );
 };
 
 export default App;
